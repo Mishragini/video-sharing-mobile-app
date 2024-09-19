@@ -6,6 +6,7 @@ import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 import { images } from "../../constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
+import { signIn } from "@/lib/appwrite";
 
 
 const SignIn = () => {
@@ -16,7 +17,21 @@ const SignIn = () => {
     });
 
     const submit = async () => {
+        if (!form.email || !form.password) {
+            Alert.alert('Error', 'Please fill in all the fields')
+        }
 
+        setSubmitting(true);
+
+        try {
+            const result = await signIn(form.email, form.password);
+            
+            router.replace('/home');
+        } catch (error: any) {
+            Alert.alert('Error', error.message)
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
