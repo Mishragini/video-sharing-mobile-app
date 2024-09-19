@@ -137,3 +137,26 @@ export async function searchPosts(query: string) {
         throw new Error(error as string);
     }
 }
+
+export async function getUserPosts(userId: string) {
+    try {
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.videoCollectionId,
+            [Query.equal('creator', userId)]
+        );
+
+        return posts.documents;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
+
+export const signOut = async () => {
+    try {
+        const session = await account.deleteSession('current');
+        return session;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
