@@ -110,12 +110,26 @@ export async function getAllPosts() {
     }
 }
 
-export async function getLastesPosts() {
+export async function getLastestPosts() {
     try {
         const posts = await databases.listDocuments(
             appwriteConfig.databaseId,
             appwriteConfig.videoCollectionId,
             [Query.orderDesc('$createdAt'), Query.limit(7)]
+        );
+
+        return posts.documents;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
+
+export async function searchPosts(query: string) {
+    try {
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.videoCollectionId,
+            [Query.search('title', query)]
         );
 
         return posts.documents;

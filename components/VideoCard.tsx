@@ -72,7 +72,6 @@ const VideoCard = ({ video }: any) => {
                     shouldPlay
                     onError={(error) => console.error("Video Error:", error)}
                     onPlaybackStatusUpdate={(status) => {
-                        console.log("Playback Status:", status);
                         if (status.isLoaded && status.didJustFinish) {
                             setPlay(false)
                         }
