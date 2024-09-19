@@ -5,13 +5,15 @@ import { images } from '@/constants'
 import SearchInput from '@/components/SearchInput'
 import Trending from '@/components/Trending'
 import EmptyState from '@/components/EmptyState'
-import { getAllPosts } from '@/lib/appwrite'
+import { getAllPosts, getLastesPosts } from '@/lib/appwrite'
 import { useAppwrite } from '@/lib/useAppwrite'
 import VideoCard from '@/components/VideoCard'
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, refetch } = useAppwrite(getAllPosts)
+  const { data: latestPosts } = useAppwrite(getLastesPosts)
+
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -24,7 +26,6 @@ const Home = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => {
-          console.log(item)
           return <VideoCard video={item} />
         }}
         ListHeaderComponent={() => (
@@ -48,7 +49,7 @@ const Home = () => {
               <Text className='text-gray-100 text-lg font-pregular mb-3'>
                 Latest Videos
               </Text>
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts} />
             </View>
           </View>
         )}
