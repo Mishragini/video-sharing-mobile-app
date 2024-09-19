@@ -97,3 +97,16 @@ export async function getCurrentUser() {
     }
 }
 
+export async function getAllPosts() {
+    try {
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.videoCollectionId
+        );
+
+        return posts.documents;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
+
