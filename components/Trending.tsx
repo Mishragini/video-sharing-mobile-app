@@ -27,7 +27,6 @@ const TrendingItem = ({ activeItem, item }: {
     item: any
 }) => {
     const [play, setPlay] = useState(false);
-    console.log(item.video)
 
     return (
         <Animatable.View

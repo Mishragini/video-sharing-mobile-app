@@ -4,6 +4,7 @@
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -13,14 +14,15 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.personal.aora"
+      "bundleIdentifier": "com.myapp.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
-        "package": "com.personal.aora"
-      }
+        "package": "com.myapp.app"
+      },
+      "package": "com.myapp.app"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +34,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "52ae76d2-cf55-4bc8-b952-17f00b14255e"
+      }
     }
   }
 }
